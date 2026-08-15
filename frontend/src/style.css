@@ -91,6 +91,26 @@ code,
   color: var(--text-h);
 }
 
+.panel {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  text-align: left;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+button { cursor: pointer }
+.danger { background: #fee2e2; border: 1px solid #fca5a5 }
+.error { color: #b91c1c; background: rgba(254, 226, 226, 0.6); padding: 8px; border-radius: 6px }
+.note-item, .goal-item { padding: 8px 0; border-bottom: 1px dashed var(--border) }
+.edit-box input, .edit-box textarea { display: block; width: 100%; margin-bottom: 6px }
+
 code {
   font-size: 15px;
   line-height: 135%;
