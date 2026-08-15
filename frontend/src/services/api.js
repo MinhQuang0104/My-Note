@@ -51,6 +51,23 @@ export async function createNote(token, payload) {
   return handleResponse(res)
 }
 
+export async function updateNote(token, id, payload) {
+  const res = await fetch(`${BASE}/notes/${id}`, {
+    method: 'PUT',
+    headers: authHeaders(token),
+    body: JSON.stringify(payload),
+  })
+  return handleResponse(res)
+}
+
+export async function deleteNote(token, id) {
+  const res = await fetch(`${BASE}/notes/${id}`, {
+    method: 'DELETE',
+    headers: authHeaders(token),
+  })
+  return handleResponse(res)
+}
+
 export async function getGoals(token) {
   const res = await fetch(`${BASE}/goals`, {
     headers: authHeaders(token),
@@ -63,6 +80,23 @@ export async function createGoal(token, payload) {
     method: 'POST',
     headers: authHeaders(token),
     body: JSON.stringify(payload),
+  })
+  return handleResponse(res)
+}
+
+export async function updateGoal(token, id, payload) {
+  const res = await fetch(`${BASE}/goals/${id}`, {
+    method: 'PUT',
+    headers: authHeaders(token),
+    body: JSON.stringify(payload),
+  })
+  return handleResponse(res)
+}
+
+export async function deleteGoal(token, id) {
+  const res = await fetch(`${BASE}/goals/${id}`, {
+    method: 'DELETE',
+    headers: authHeaders(token),
   })
   return handleResponse(res)
 }
