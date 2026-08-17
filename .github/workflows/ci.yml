@@ -139,6 +139,9 @@ jobs:
         uses: brenoepics/vmd-action@v0.0.7
   infra: 
     runs-on: ubuntu-latest
+    needs: [file-change]
+    if: needs.file-change.outputs.infra == 'true'
+    name: Terraform CI
     steps:
       - uses: actions/checkout@v4
       - uses: pipery-dev/pipery-terraform-ci@v1
@@ -162,4 +165,3 @@ jobs:
 
 
 
-          
