@@ -1,41 +1,44 @@
 # Project My Note - AI Analysis Context
 
-Thư mục này lưu ngữ cảnh phân tích sản phẩm và kỹ thuật cho các session AI/BA/Dev tiếp theo.
+Thu muc nay luu ngu canh phan tich san pham, ky thuat va tien do hien tai cho cac session AI/BA/Dev tiep theo.
 
-## Ý tưởng tổng quan
+## Nen tang san pham
 
-Xây dựng một website ghi chú cá nhân để vừa sử dụng thật, vừa tự học trọn vẹn quy trình phát triển phần mềm:
+Project My Note la monorepo hoc tap va xay dung ung dung ghi chu ca nhan, gom:
 
-- Phân tích nghiệp vụ và thiết kế sản phẩm.
-- Xây dựng website ghi chú cá nhân.
-- Viết CI/CD bằng GitHub Actions.
-- Viết Terraform để dựng hạ tầng.
-- Triển khai ứng dụng lên môi trường thật.
-- Theo dõi, cải tiến, mở rộng tính năng theo từng giai đoạn.
+- Frontend Vue 3 + Vite.
+- Backend Laravel API + Sanctum.
+- PostgreSQL local qua Docker Compose.
+- Tai lieu phan tich, ke hoach CI/CD va ha tang trong `AI-Analyze/`, `.github/`, `infra/`.
 
-## Các module sản phẩm chính
+## File nen doc truoc
 
-- **Notes**: lưu và quản lý ghi chú cơ bản.
-- **Goals**: tạo các mục tiêu linh hoạt như uống nước, tập thể dục, học tiếng Anh.
-- **Goal Tracking**: ghi nhận tiến độ hằng ngày của từng mục tiêu.
-- **Calendar**: xem lịch chung theo ngày, tuần, tháng; hiển thị lịch trình và trạng thái hoàn thành mục tiêu.
+- [analysis-history.md](analysis-history.md): lich su cac lan quet/phan tich.
+- [14-current-state-analysis.md](14-current-state-analysis.md): snapshot codebase moi nhat theo lan quet gan nhat.
+- [15-gap-and-next-actions.md](15-gap-and-next-actions.md): chenhlech giua tai lieu cu va implementation, cung viec uu tien tiep theo.
 
-## Tài liệu trong thư mục
+## Tai lieu phan tich goc
 
-- [01-product-vision.md](01-product-vision.md): tầm nhìn, mục tiêu, đối tượng người dùng, giá trị sản phẩm.
-- [02-functional-requirements.md](02-functional-requirements.md): yêu cầu chức năng theo module.
-- [03-user-stories.md](03-user-stories.md): user stories và acceptance criteria ban đầu.
-- [04-domain-model.md](04-domain-model.md): khái niệm nghiệp vụ, entity, quan hệ dữ liệu.
-- [05-mvp-scope.md](05-mvp-scope.md): phạm vi MVP và các giai đoạn sau.
-- [06-technical-learning-roadmap.md](06-technical-learning-roadmap.md): lộ trình học kỹ thuật từ app đến CI/CD, Terraform, deploy.
-- [07-open-questions.md](07-open-questions.md): câu hỏi cần làm rõ trong các session sau.
-- [08-architecture-decision.md](08-architecture-decision.md): quyết định kiến trúc ban đầu, gồm Vue.js cho frontend và Laravel cho backend.
+- [01-product-vision.md](01-product-vision.md): tam nhin, muc tieu, doi tuong nguoi dung, gia tri san pham.
+- [02-functional-requirements.md](02-functional-requirements.md): yeu cau chuc nang theo module.
+- [03-user-stories.md](03-user-stories.md): user stories va acceptance criteria ban dau.
+- [04-domain-model.md](04-domain-model.md): khai niem nghiep vu, entity, quan he du lieu.
+- [05-mvp-scope.md](05-mvp-scope.md): pham vi MVP va cac giai doan sau.
+- [06-technical-learning-roadmap.md](06-technical-learning-roadmap.md): lo trinh hoc ky thuat.
+- [07-open-questions.md](07-open-questions.md): cau hoi can lam ro.
+- [08-architecture-decision.md](08-architecture-decision.md): quyet dinh kien truc ban dau.
+- [09-api-contract.md](09-api-contract.md): API contract du kien.
+- [10-api-implementation-plan.md](10-api-implementation-plan.md): ke hoach implement API.
+- [11-database-schema.md](11-database-schema.md): schema database du kien.
+- [12-ci-cd-aws-plan.md](12-ci-cd-aws-plan.md): ke hoach CI/CD va AWS.
+- [13-project-plan.md](13-project-plan.md): project plan theo phase/sprint.
 
-## Nguyên tắc phân tích hiện tại
+## Ghi chu ve tai lieu cu
 
-- Bắt đầu nhỏ, nhưng thiết kế để mở rộng.
-- Ưu tiên chức năng có giá trị thật cho người dùng cá nhân.
-- Biến mỗi tính năng thành cơ hội học một phần kỹ thuật.
-- Không khóa chặt module "Mục tiêu" vào một loại cụ thể như uống nước; cần mô hình hóa linh hoạt.
-- Calendar là nơi tổng hợp sự kiện, lịch trình và trạng thái goal, không chỉ là lịch hẹn.
-- Tech stack đã chốt ban đầu: **Vue.js frontend + Laravel backend**.
+Mot so file goc dang bi loi hien thi tieng Viet do encoding. Khi can chinh sua sau nay, nen uu tien viet moi bang UTF-8 hoac thay the tung file bang ban sach, tranh copy tiep noi dung mojibake.
+
+## Nguyen tac cap nhat
+
+- Moi lan quet nen them mot entry vao [analysis-history.md](analysis-history.md).
+- Neu implementation thay doi API/schema/frontend flow, cap nhat snapshot trong [14-current-state-analysis.md](14-current-state-analysis.md).
+- Neu tai lieu goc va code that lech nhau, ghi ro trong [15-gap-and-next-actions.md](15-gap-and-next-actions.md).
