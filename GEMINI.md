@@ -1,4 +1,4 @@
-# Project My Note Agent Guide
+gi# Project My Note Agent Guide
 
 ## Project Identity
 

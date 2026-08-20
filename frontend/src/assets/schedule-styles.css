@@ -1,0 +1,13 @@
+.event{display:grid;grid-template-columns:58px 9px minmax(0,1fr);gap:10px;align-items:start;padding-bottom:11px;border-bottom:1px solid var(--line);font-size:13px}.event:last-child{border:0;padding-bottom:0}.event-time{color:var(--muted);font-size:12px}.dot{width:9px;height:9px;margin-top:5px;border-radius:50%;background:var(--yellow)}.event-title{font-weight:600}.event small{display:block;color:var(--muted);font-size:11px}
+.month-view{display:grid;gap:10px}.month-heading{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.month-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.month-weekday{text-align:center;color:var(--muted);font-size:10px;font-weight:700;padding:4px 0}.month-day{min-height:45px;padding:6px;border:1px solid var(--line);border-radius:6px;background:#fbfdff;color:var(--muted);font-size:11px}.month-day.empty{border-color:transparent;background:transparent}.month-day.today{border-color:var(--blue-500);background:var(--blue-100);color:var(--blue-700);font-weight:700}.month-day.has-event:after{content:"";display:block;width:5px;height:5px;margin-top:6px;border-radius:50%;background:var(--green)}
+.year-view{display:grid;gap:11px}.year-summary{display:flex;justify-content:space-between;align-items:end;padding:13px 15px;border-radius:8px;background:var(--blue-100)}.year-summary strong{display:block;color:var(--blue-700);font-size:24px;line-height:1}.year-summary span{color:var(--muted);font-size:11px}.year-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.year-month{padding:11px;border:1px solid var(--line);border-radius:7px;background:#fbfdff}.year-month strong{display:block;font-size:13px}.year-month small{display:block;margin-top:5px;color:var(--muted);font-size:11px}.year-progress{height:5px;margin-top:9px;border-radius:99px;background:#e8f0f5;overflow:hidden}.year-progress i{display:block;height:100%;border-radius:inherit;background:var(--blue-500)}
+
+@media(max-width:520px){
+    .year-grid{grid-template-columns:repeat(3,1fr)}
+    .month-day{min-height:39px;padding:5px}
+}
+
+/* Custom variable for shadow to work with tailwind */
+:root {
+    --shadow: 0 12px 28px rgba(35, 92, 135, 0.08);
+}
