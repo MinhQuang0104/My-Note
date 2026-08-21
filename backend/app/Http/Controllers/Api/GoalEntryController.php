@@ -56,7 +56,9 @@ class GoalEntryController extends Controller
     private function refreshStatusForDate(Goal $goal, mixed $date): void
     {
         $entries = $goal->entries()->whereDate('log_date', $date)->get();
-        $total = (float) $entries->sum('value');
+        $total = (float) $entries->sum(
+            fn (GoalEntry $goalEntry): float => (float) $goalEntry->value,
+        );
         $status = $total <= 0 ? 'not_done' : ($goal->target_value !== null && $total < (float) $goal->target_value ? 'partial' : 'completed');
         $goal->entries()->whereDate('log_date', $date)->update(['status' => $status]);
     }

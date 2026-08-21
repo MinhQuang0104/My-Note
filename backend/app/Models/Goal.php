@@ -3,7 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property \Illuminate\Support\Carbon $start_date
+ * @property \Illuminate\Support\Carbon|null $end_date
+ */
 class Goal extends Model
 {
     protected $fillable = [
@@ -22,12 +28,14 @@ class Goal extends Model
         ];
     }
 
-    public function user()
+    /** @return BelongsTo<User, $this> */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function entries()
+    /** @return HasMany<GoalEntry, $this> */
+    public function entries(): HasMany
     {
         return $this->hasMany(GoalEntry::class);
     }

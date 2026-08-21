@@ -3,7 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property \Illuminate\Support\Carbon $log_date
+ * @property string $value
+ */
 class GoalEntry extends Model
 {
     protected $fillable = ['goal_id', 'user_id', 'log_date', 'value', 'note', 'status'];
@@ -16,12 +21,14 @@ class GoalEntry extends Model
         ];
     }
 
-    public function goal()
+    /** @return BelongsTo<Goal, $this> */
+    public function goal(): BelongsTo
     {
         return $this->belongsTo(Goal::class);
     }
 
-    public function user()
+    /** @return BelongsTo<User, $this> */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
