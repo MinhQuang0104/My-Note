@@ -8,7 +8,7 @@ async function parseBody(res) {
 async function handleResponse(res) {
   const body = await parseBody(res)
   if (!res.ok) throw body
-  return body
+  return Object.prototype.hasOwnProperty.call(body, 'data') ? body.data : body
 }
 
 function authHeaders(token) {

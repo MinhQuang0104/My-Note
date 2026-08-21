@@ -34,10 +34,10 @@ class AuthController extends Controller
 
         $token = $user->createToken('local')->plainTextToken;
 
-        return response()->json([
+        return $this->success([
             'user' => $user,
             'token' => $token,
-        ], 201);
+        ], 'Registered successfully.', status: 201);
     }
 
     public function login(Request $request)
@@ -64,21 +64,21 @@ class AuthController extends Controller
 
         $token = $user->createToken('local')->plainTextToken;
 
-        return response()->json([
+        return $this->success([
             'user' => $user,
             'token' => $token,
-        ]);
+        ], 'Logged in successfully.');
     }
 
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
 
-        return response()->json(['message' => 'Logged out']);
+        return $this->success(message: 'Logged out successfully.');
     }
 
     public function me(Request $request)
     {
-        return response()->json($request->user());
+        return $this->success($request->user());
     }
 }
