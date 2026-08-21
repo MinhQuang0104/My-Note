@@ -20,7 +20,7 @@ frontend/yarn-error.log*
 backend/vendor/
 backend/node_modules/
 backend/.env
-backend/.env.*
+# backend/.env.*
 backend/docker.env
 backend/storage/*.key
 backend/storage/app/public/
