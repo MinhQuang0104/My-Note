@@ -34,17 +34,18 @@ return new class extends Migration
 
         Schema::table('goal_entries', function (Blueprint $table) {
             $table->renameColumn('entry_date', 'log_date');
-            $table->renameColumn('label', 'value');
+            $table->decimal('value_numeric', 10, 2)->default(0)->after('log_date');
         });
 
         DB::table('goal_entries')->get()->each(function (object $entry): void {
-            $rawValue = (string) $entry->value;
+            $rawValue = (string) $entry->label;
             $value = preg_match('/^\d+(\.\d+)?$/', $rawValue) === 1 ? $rawValue : '0';
-            DB::table('goal_entries')->where('id', $entry->id)->update(['value' => $value]);
+            DB::table('goal_entries')->where('id', $entry->id)->update(['value_numeric' => $value]);
         });
 
         Schema::table('goal_entries', function (Blueprint $table) {
-            $table->decimal('value', 10, 2)->default(0)->change();
+            $table->dropColumn('label');
+            $table->renameColumn('value_numeric', 'value');
             $table->string('status', 20)->default('not_done')->after('value');
             $table->index(['goal_id', 'log_date']);
             $table->index(['user_id', 'log_date']);
@@ -58,17 +59,24 @@ return new class extends Migration
         });
 
         Schema::table('goal_entries', function (Blueprint $table) {
-            $table->dropIndex(['goal_entries_goal_id_log_date_index']);
-            $table->dropIndex(['goal_entries_user_id_log_date_index']);
+            $table->dropIndex('goal_entries_goal_id_log_date_index');
+            $table->dropIndex('goal_entries_user_id_log_date_index');
             $table->dropColumn('status');
-            $table->string('value')->change();
+            $table->string('label')->nullable()->after('log_date');
+        });
+
+        DB::table('goal_entries')->update([
+            'label' => DB::raw('CAST(value AS TEXT)'),
+        ]);
+
+        Schema::table('goal_entries', function (Blueprint $table) {
+            $table->dropColumn('value');
             $table->renameColumn('log_date', 'entry_date');
-            $table->renameColumn('value', 'label');
         });
 
         Schema::table('goals', function (Blueprint $table) {
-            $table->dropIndex(['goals_user_id_start_date_index']);
-            $table->dropIndex(['goals_user_id_is_active_index']);
+            $table->dropIndex('goals_user_id_start_date_index');
+            $table->dropIndex('goals_user_id_is_active_index');
             $table->dropColumn(['type', 'target_value', 'unit', 'repeat_rule', 'end_date', 'color', 'icon', 'tags']);
             $table->renameColumn('name', 'title');
             $table->renameColumn('start_date', 'target_date');
