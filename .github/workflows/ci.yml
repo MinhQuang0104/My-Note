@@ -105,7 +105,7 @@ jobs:
 
       - name: PHPStan
         working-directory: backend
-          run: ./vendor/bin/phpstan analyse app database --level=5 --memory-limit=1G
+        run: ./vendor/bin/phpstan analyse app database --level=5 --memory-limit=1G
 
       - name: PHP Insights
         working-directory: backend
