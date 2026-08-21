@@ -8,6 +8,8 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d my_note"]
       interval: 5s
@@ -15,14 +17,29 @@ services:
       retries: 10
 
   backend:
-    image: php:8.3-fpm
+    build:
+      context: ./backend
     container_name: my-note-backend
     working_dir: /var/www
     volumes:
       - ./backend:/var/www
+      - ./backend/docker.env:/var/www/.env
     depends_on:
       db:
         condition: service_healthy
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8000
+      FRONTEND_URL: http://localhost:5173
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: my_note
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
 
   frontend:
     image: node:22
@@ -30,6 +47,8 @@ services:
     working_dir: /app
     volumes:
       - ./frontend:/app
+    ports:
+      - "5173:5173"
     command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
 
 volumes:

@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -18,17 +19,20 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, HasApiTokens, Notifiable;
 
-    public function notes()
+    /** @return HasMany<Note, $this> */
+    public function notes(): HasMany
     {
         return $this->hasMany(Note::class);
     }
 
-    public function goals()
+    /** @return HasMany<Goal, $this> */
+    public function goals(): HasMany
     {
         return $this->hasMany(Goal::class);
     }
 
-    public function goalEntries()
+    /** @return HasMany<GoalEntry, $this> */
+    public function goalEntries(): HasMany
     {
         return $this->hasMany(GoalEntry::class);
     }

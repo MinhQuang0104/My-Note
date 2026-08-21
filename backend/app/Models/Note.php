@@ -3,12 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Note extends Model
 {
-    protected $fillable = ['user_id', 'title', 'content', 'is_archived'];
+    protected $fillable = ['user_id', 'title', 'content', 'tags', 'is_archived'];
 
-    public function user()
+    protected function casts(): array
+    {
+        return [
+            'tags' => 'array',
+            'is_archived' => 'boolean',
+        ];
+    }
+
+    /** @return BelongsTo<User, $this> */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

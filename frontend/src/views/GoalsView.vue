@@ -7,10 +7,10 @@ const goals = ref([])
 const loading = ref(false)
 const err = ref(null)
 
-const form = ref({ title: '', description: '', target_date: '' })
+const form = ref({ name: '', description: '', type: 'boolean', repeat_rule: 'daily', start_date: '', tags: [] })
 
 const editingId = ref(null)
-const editBuffer = ref({ title: '', description: '', target_date: '' })
+const editBuffer = ref({ name: '', description: '', start_date: '' })
 
 const { token } = useAuth()
 
@@ -29,18 +29,18 @@ async function createGoal() {
   try {
     const g = await api.createGoal(token.value, form.value)
     goals.value.unshift(g)
-    form.value.title = ''
+    form.value.name = ''
     form.value.description = ''
-    form.value.target_date = ''
+    form.value.start_date = ''
   } catch (e) { err.value = e }
 }
 
 function startEdit(g) {
   editingId.value = g.id
-  editBuffer.value = { title: g.title, description: g.description, target_date: g.target_date }
+  editBuffer.value = { name: g.name, description: g.description, start_date: g.start_date }
 }
 
-function cancelEdit() { editingId.value = null; editBuffer.value = { title: '', description: '', target_date: '' } }
+function cancelEdit() { editingId.value = null; editBuffer.value = { name: '', description: '', start_date: '' } }
 
 async function saveEdit(g) {
   err.value = null
@@ -71,9 +71,9 @@ onMounted(() => load())
     <div v-if="err" class="error">Error: {{ typeof err === 'string' ? err : JSON.stringify(err) }}</div>
 
     <form @submit.prevent="createGoal" style="margin-bottom:12px">
-      <input v-model="form.title" placeholder="Tiêu đề mục tiêu" required />
+      <input v-model="form.name" placeholder="Tên mục tiêu" required />
       <br />
-      <input v-model="form.target_date" placeholder="YYYY-MM-DD" />
+      <input v-model="form.start_date" placeholder="YYYY-MM-DD" required />
       <br />
       <textarea v-model="form.description" placeholder="Mô tả"></textarea>
       <br />
@@ -85,7 +85,7 @@ onMounted(() => load())
     <ul>
       <li v-for="g in goals" :key="g.id" class="goal-item">
         <div v-if="editingId !== g.id">
-          <strong>{{ g.title }}</strong> — <em>{{ g.target_date || 'No date' }}</em>
+          <strong>{{ g.name }}</strong> — <em>{{ g.start_date || 'No date' }}</em>
           <p>{{ g.description }}</p>
           <div class="actions">
             <button @click="startEdit(g)">Edit</button>
@@ -94,8 +94,8 @@ onMounted(() => load())
         </div>
 
         <div v-else class="edit-box">
-          <input v-model="editBuffer.title" />
-          <input v-model="editBuffer.target_date" placeholder="YYYY-MM-DD" />
+          <input v-model="editBuffer.name" />
+          <input v-model="editBuffer.start_date" placeholder="YYYY-MM-DD" />
           <textarea v-model="editBuffer.description"></textarea>
           <div class="actions">
             <button @click="saveEdit(g)">Save</button>

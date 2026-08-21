@@ -221,6 +221,7 @@ Content-Type: application/json
 - `is_active`: boolean.
 - `color`: optional string.
 - `icon`: optional string.
+- `tags`: array[string], optional.
 - `created_at`, `updated_at`
 
 ### Create goal

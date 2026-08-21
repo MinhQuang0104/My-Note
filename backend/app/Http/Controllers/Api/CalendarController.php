@@ -11,7 +11,7 @@ class CalendarController extends Controller
     {
         $user = $request->user();
 
-        return response()->json([
+        return $this->success([
             'notes' => $user->notes()->latest()->take(10)->get(),
             'goals' => $user->goals()->latest()->take(10)->get(),
             'entries' => $user->goalEntries()->latest()->take(10)->get(),

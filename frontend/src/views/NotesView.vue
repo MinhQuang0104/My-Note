@@ -90,7 +90,7 @@ onMounted(() => load())
       <li v-for="n in notes" :key="n.id" class="note-item">
         <div v-if="editingId !== n.id">
           <strong>{{ n.title }}</strong>
-          <p>{{ n.content }}</p>
+          <p>{{ n.content || n.excerpt }}</p>
           <div class="actions">
             <button @click="startEdit(n)">Edit</button>
             <button @click="removeNote(n)" class="danger">Delete</button>
