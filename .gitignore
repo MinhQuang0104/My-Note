@@ -33,7 +33,6 @@ backend/public/storage
 backend/public/build
 backend/phpunit.result.cache
 backend/.phpunit.result.cache
-backend/composer.lock
 
 # Docker / local data
 *.log
